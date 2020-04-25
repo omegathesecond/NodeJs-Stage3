@@ -1,15 +1,16 @@
 const fs = require("fs");
 var event = require("events");
 
+
+
+
 exports.voter = class Voter {
 
 
 
-    constructor(idNumber, names) {
+    constructor(idNumber = "", names) {
         this.idNumber = idNumber;
         this.names = names;
-        this.eventEmitter = new event.EventEmitter();
-        
     }
 
     voted() {
@@ -34,12 +35,12 @@ exports.voter = class Voter {
 
     votedFor() {
         //returns name of political party voted for
-       
+
     }
 
     updateLogs() {
         console.log(JSON.stringify(this.eventEmitter));
-       
+
     }
 
 
@@ -47,5 +48,13 @@ exports.voter = class Voter {
         return `Names: ${this.names} \n ID Number: ${this.idNumber}`;
     }
 
+    deleteVoter() {
+        fs.unlinkSync(`${this.names}.txt`);
+
+    }
+
+
+
 
 }
+
